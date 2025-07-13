@@ -1,0 +1,17 @@
+{
+    "appTitle": "تطبيق الدردشة",
+    "welcomeMessage": "مرحبًا بك في تطبيق H-Talk",
+    "loginButton": "تسجيل الدخول",
+    "signupButton": "إنشاء حساب",
+    "logoutButton": "تسجيل الخروج",
+    "settingsTitle": "الإعدادات",
+    "profileTitle": "الملف الشخصي",
+    "chatTitle": "الدردشة",
+    "sendButton": "إرسال",
+    "emailHint": "البريد الإلكتروني",
+    "passwordHint": "كلمة المرور",
+    "dontHaveAccountMessage" : "ليس لديك حساب ؟ ",
+    "alreadyHaveAccountMessage" : "هل لديك حساب بالفعل ؟ ",
+    "signinNavigator":"تسجيل الدخول",
+    "signUpNavigator":"إنشاء حساب"
+}

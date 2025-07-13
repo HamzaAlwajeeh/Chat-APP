@@ -1,7 +1,9 @@
 import 'package:chat_app/constants/constants.dart';
+import 'package:chat_app/generated/l10n.dart';
 import 'package:chat_app/routes/app_route.dart';
 import 'package:chat_app/view/home_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() {
   runApp(const ChatApp());
@@ -13,8 +15,16 @@ class ChatApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      locale: Locale('en'),
+      localizationsDelegates: [
+        S.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: S.delegate.supportedLocales,
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Auth',
+      title: 'H-Talk app',
       theme: ThemeData(
         useMaterial3: false,
         primaryColor: kPrimaryColor,

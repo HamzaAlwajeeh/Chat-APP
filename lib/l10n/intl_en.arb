@@ -1,0 +1,17 @@
+{
+    "appTitle": "HM Chat",
+    "welcomeMessage": "Welcome to H-Talk app",
+    "loginButton": "LOGIN",
+    "signupButton": "SIGNUP",
+    "logoutButton": "LOGOUT",
+    "settingsTitle": "Settings",
+    "profileTitle": "Profile",
+    "chatTitle": "Chat",
+    "sendButton": "Send",
+    "emailHint": "Email",
+    "passwordHint": "Password",
+    "dontHaveAccountMessage" : "Don't have an Account ? ",
+    "alreadyHaveAccountMessage" : "Already have an Account ? ",
+    "signinNavigator":"Sign In",
+    "signUpNavigator":"Sign Up"
+}

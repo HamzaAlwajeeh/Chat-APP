@@ -1,4 +1,5 @@
 import 'package:chat_app/constants/constants.dart';
+import 'package:chat_app/generated/l10n.dart';
 import 'package:chat_app/widgets/back_ground.dart';
 import 'package:chat_app/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
@@ -13,8 +14,8 @@ class HomeView extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Text(
-            "WELCOME TO CHAT APP",
+          Text(
+            S.of(context).welcomeMessage,
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
           ),
           const SizedBox(height: defaultPadding * 2),
@@ -31,7 +32,7 @@ class HomeView extends StatelessWidget {
           const SizedBox(height: defaultPadding * 2),
           CustomButton(
             color: kPrimaryColor,
-            text: 'LOGIN',
+            text: S.of(context).loginButton,
             onPress: () {
               Navigator.pushNamed(context, kLoginView);
             },
@@ -40,7 +41,7 @@ class HomeView extends StatelessWidget {
           SizedBox(height: 16),
           CustomButton(
             color: kPrimaryLightColor,
-            text: 'SIGN UP',
+            text: S.of(context).signupButton,
             onPress: () {
               Navigator.pushNamed(context, kSignUpView);
             },

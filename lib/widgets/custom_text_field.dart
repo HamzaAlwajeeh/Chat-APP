@@ -20,16 +20,23 @@ class CustomTextField extends StatelessWidget {
     return SizedBox(
       width: 300,
       child: TextField(
-        style: TextStyle(fontWeight: FontWeight.bold),
+        style: TextStyle(fontWeight: FontWeight.bold, height: 1),
         obscureText: obscureText,
         decoration: InputDecoration(
-          contentPadding: EdgeInsets.symmetric(vertical: 20),
           hintText: hintText,
           prefixIcon: Icon(prefixIcon, color: kPrimaryColor),
           suffixIcon: Icon(suffixIcon, color: kPrimaryColor),
           hintStyle: TextStyle(
             fontWeight: FontWeight.bold,
             color: kPrimaryColor.withOpacity(0.7),
+          ),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(30)),
+            borderSide: BorderSide.none,
+          ),
+          contentPadding: EdgeInsets.symmetric(
+            horizontal: defaultPadding + 4,
+            vertical: defaultPadding + 4,
           ),
         ),
       ),
