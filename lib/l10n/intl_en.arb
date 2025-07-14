@@ -13,5 +13,9 @@
     "dontHaveAccountMessage" : "Don't have an Account ? ",
     "alreadyHaveAccountMessage" : "Already have an Account ? ",
     "signinNavigator":"Sign In",
-    "signUpNavigator":"Sign Up"
+    "signUpNavigator":"Sign Up",
+    "weakPassword" : "weak password",
+    "emailExist" : "This account already exist",
+    "signUpSuccess": "Sign up Successfully"
+
 }

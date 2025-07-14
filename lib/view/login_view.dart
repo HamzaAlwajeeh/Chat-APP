@@ -36,12 +36,12 @@ class LoginView extends StatelessWidget {
               ],
             ),
             CustomTextField(
-              obscureText: false,
+              isPassword: false,
               hintText: S.of(context).emailHint,
               prefixIcon: Icons.person,
             ),
             CustomTextField(
-              obscureText: true,
+              isPassword: true,
               hintText: S.of(context).passwordHint,
               prefixIcon: Icons.lock,
               suffixIcon: Icons.visibility,
@@ -56,7 +56,7 @@ class LoginView extends StatelessWidget {
             AlreadyHaveAnAccount(
               login: true,
               onTap: () {
-                Navigator.pushNamed(context, kSignUpView);
+                Navigator.popAndPushNamed(context, kSignUpView);
               },
             ),
           ],

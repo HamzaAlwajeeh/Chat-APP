@@ -30,6 +30,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "dontHaveAccountMessage": MessageLookupByLibrary.simpleMessage(
       "ليس لديك حساب ؟ ",
     ),
+    "emailExist": MessageLookupByLibrary.simpleMessage(
+      "هذا الحساب موجود مسبقاً",
+    ),
     "emailHint": MessageLookupByLibrary.simpleMessage("البريد الإلكتروني"),
     "loginButton": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
     "logoutButton": MessageLookupByLibrary.simpleMessage("تسجيل الخروج"),
@@ -38,6 +41,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "sendButton": MessageLookupByLibrary.simpleMessage("إرسال"),
     "settingsTitle": MessageLookupByLibrary.simpleMessage("الإعدادات"),
     "signUpNavigator": MessageLookupByLibrary.simpleMessage("إنشاء حساب"),
+    "signUpSuccess": MessageLookupByLibrary.simpleMessage(
+      "تم إنشاء الحساب بنجاح",
+    ),
     "signinNavigator": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
     "signupButton": MessageLookupByLibrary.simpleMessage("إنشاء حساب"),
     "welcomeMessage": MessageLookupByLibrary.simpleMessage(

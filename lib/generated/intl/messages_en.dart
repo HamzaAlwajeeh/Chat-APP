@@ -30,6 +30,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "dontHaveAccountMessage": MessageLookupByLibrary.simpleMessage(
       "Don\'t have an Account ? ",
     ),
+    "emailExist": MessageLookupByLibrary.simpleMessage(
+      "This account already exist",
+    ),
     "emailHint": MessageLookupByLibrary.simpleMessage("Email"),
     "loginButton": MessageLookupByLibrary.simpleMessage("LOGIN"),
     "logoutButton": MessageLookupByLibrary.simpleMessage("LOGOUT"),
@@ -38,8 +41,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "sendButton": MessageLookupByLibrary.simpleMessage("Send"),
     "settingsTitle": MessageLookupByLibrary.simpleMessage("Settings"),
     "signUpNavigator": MessageLookupByLibrary.simpleMessage("Sign Up"),
+    "signUpSuccess": MessageLookupByLibrary.simpleMessage(
+      "Sign up Successfully",
+    ),
     "signinNavigator": MessageLookupByLibrary.simpleMessage("Sign In"),
     "signupButton": MessageLookupByLibrary.simpleMessage("SIGNUP"),
+    "weakPassword": MessageLookupByLibrary.simpleMessage("weak password"),
     "welcomeMessage": MessageLookupByLibrary.simpleMessage(
       "Welcome to H-Talk app",
     ),

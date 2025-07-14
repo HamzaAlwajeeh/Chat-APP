@@ -143,6 +143,36 @@ class S {
   String get signUpNavigator {
     return Intl.message('Sign Up', name: 'signUpNavigator', desc: '', args: []);
   }
+
+  /// `weak password`
+  String get weakPassword {
+    return Intl.message(
+      'weak password',
+      name: 'weakPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This account already exist`
+  String get emailExist {
+    return Intl.message(
+      'This account already exist',
+      name: 'emailExist',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign up Successfully`
+  String get signUpSuccess {
+    return Intl.message(
+      'Sign up Successfully',
+      name: 'signUpSuccess',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

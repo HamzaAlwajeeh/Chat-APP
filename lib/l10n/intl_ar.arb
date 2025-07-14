@@ -13,5 +13,8 @@
     "dontHaveAccountMessage" : "ليس لديك حساب ؟ ",
     "alreadyHaveAccountMessage" : "هل لديك حساب بالفعل ؟ ",
     "signinNavigator":"تسجيل الدخول",
-    "signUpNavigator":"إنشاء حساب"
+    "signUpNavigator":"إنشاء حساب",
+    "weak-password" : "كلمة مرور ضعيفة",
+    "emailExist" : "هذا الحساب موجود مسبقاً",
+    "signUpSuccess": "تم إنشاء الحساب بنجاح"
 }
