@@ -9,7 +9,7 @@ void customSnakBatr(
 }) {
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
-      duration: Duration(seconds: 5),
+      // duration: Duration(seconds: 5),
       behavior: SnackBarBehavior.floating,
       elevation: 2,
       width: MediaQuery.of(context).size.width - 30,

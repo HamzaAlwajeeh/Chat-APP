@@ -8,58 +8,83 @@ import 'package:chat_app/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class LoginView extends StatelessWidget {
+class LoginView extends StatefulWidget {
   const LoginView({super.key});
+
+  @override
+  State<LoginView> createState() => _LoginViewState();
+}
+
+class _LoginViewState extends State<LoginView> {
+  GlobalKey<FormState> formKey = GlobalKey();
+  AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
+  String? email, password;
 
   @override
   Widget build(BuildContext context) {
     return Background(
       isLoginView: true,
-      child: SingleChildScrollView(
-        child: Column(
-          spacing: defaultPadding,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              S.of(context).loginButton,
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-            ),
-            SizedBox(height: defaultPadding),
-            Row(
-              children: [
-                const Spacer(),
-                Expanded(
-                  flex: 8,
-                  child: SvgPicture.asset("assets/icons/login.svg"),
-                ),
-                const Spacer(),
-              ],
-            ),
-            CustomTextField(
-              isPassword: false,
-              hintText: S.of(context).emailHint,
-              prefixIcon: Icons.person,
-            ),
-            CustomTextField(
-              isPassword: true,
-              hintText: S.of(context).passwordHint,
-              prefixIcon: Icons.lock,
-              suffixIcon: Icons.visibility,
-            ),
-            CustomButton(
-              onPress: () {},
-              color: kPrimaryColor,
-              text: S.of(context).loginButton,
-              textColor: kPrimaryLightColor,
-            ),
-            SizedBox(height: 3),
-            AlreadyHaveAnAccount(
-              login: true,
-              onTap: () {
-                Navigator.popAndPushNamed(context, kSignUpView);
-              },
-            ),
-          ],
+      child: Form(
+        key: formKey,
+        autovalidateMode: autovalidateMode,
+        child: SingleChildScrollView(
+          child: Column(
+            spacing: defaultPadding,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                S.of(context).loginButton,
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              ),
+              SizedBox(height: defaultPadding),
+              Row(
+                children: [
+                  const Spacer(),
+                  Expanded(
+                    flex: 8,
+                    child: SvgPicture.asset("assets/icons/login.svg"),
+                  ),
+                  const Spacer(),
+                ],
+              ),
+              CustomTextField(
+                onChange: (data) {
+                  email = data;
+                },
+                isPassword: false,
+                hintText: S.of(context).emailHint,
+                prefixIcon: Icons.person,
+              ),
+              CustomTextField(
+                onChange: (data) {
+                  password = data;
+                },
+                isPassword: true,
+                hintText: S.of(context).passwordHint,
+                prefixIcon: Icons.lock,
+                suffixIcon: Icons.visibility,
+              ),
+              CustomButton(
+                onPress: () {
+                  if (formKey.currentState!.validate()) {
+                  } else {
+                    autovalidateMode = AutovalidateMode.always;
+                    setState(() {});
+                  }
+                },
+                color: kPrimaryColor,
+                text: S.of(context).loginButton,
+                textColor: kPrimaryLightColor,
+              ),
+              SizedBox(height: 3),
+              AlreadyHaveAnAccount(
+                login: true,
+                onTap: () {
+                  Navigator.popAndPushNamed(context, kSignUpView);
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

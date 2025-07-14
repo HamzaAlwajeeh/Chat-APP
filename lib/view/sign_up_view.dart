@@ -1,4 +1,5 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first, use_build_context_synchronously
+import 'package:chat_app/business_logic/auth/sign_up/cubit/sign_up_cubit.dart';
+import 'package:chat_app/business_logic/auth/sign_up/cubit/sign_up_state.dart';
 import 'package:chat_app/constants/constants.dart';
 import 'package:chat_app/generated/l10n.dart';
 import 'package:chat_app/widgets/already_have_an_account.dart';
@@ -6,8 +7,8 @@ import 'package:chat_app/widgets/back_ground.dart';
 import 'package:chat_app/widgets/custom_button.dart';
 import 'package:chat_app/widgets/custom_snak_bar.dart';
 import 'package:chat_app/widgets/custom_text_field.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class SignUpView extends StatefulWidget {
@@ -19,11 +20,9 @@ class SignUpView extends StatefulWidget {
 
 class _SignUpViewState extends State<SignUpView> {
   String? email;
-
   String? password;
 
-  GlobalKey<FormState> formKey = GlobalKey();
-
+  final GlobalKey<FormState> formKey = GlobalKey();
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
 
   @override
@@ -31,97 +30,97 @@ class _SignUpViewState extends State<SignUpView> {
     return Background(
       topImage: 'assets/images/signup_top.png',
       isLoginView: true,
-      child: Form(
-        key: formKey,
-        autovalidateMode: autovalidateMode,
-        child: SingleChildScrollView(
-          child: Column(
-            spacing: defaultPadding,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                S.of(context).signupButton,
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-              ),
-              SizedBox(height: defaultPadding),
-              Row(
+      child: BlocConsumer<SignUpCubit, SignUpState>(
+        listener: (context, state) async {
+          if (state is SignUpSuccess) {
+            customSnakBatr(
+              context,
+              message: S.of(context).signUpSuccess,
+              isSuccess: true,
+            );
+            // Navigator.popAndPushNamed(context, kSignUpView);
+          } else if (state is SignUpFailure) {
+            if (state.message == 'weak-password') {
+              customSnakBatr(context, message: S.of(context).weakPassword);
+            } else if (state.message == 'email-already-in-use') {
+              customSnakBatr(
+                context,
+                message: S.of(context).emailExist,
+                isSuccess: true,
+              );
+            } else {
+              customSnakBatr(context, message: state.message);
+            }
+          }
+        },
+        builder: (context, state) {
+          return Form(
+            key: formKey,
+            autovalidateMode: autovalidateMode,
+            child: SingleChildScrollView(
+              child: Column(
+                spacing: defaultPadding,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Spacer(),
-                  Expanded(
-                    flex: 8,
-                    child: SvgPicture.asset("assets/icons/signup.svg"),
+                  Text(
+                    S.of(context).signupButton,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                    ),
                   ),
-                  const Spacer(),
+                  const SizedBox(height: defaultPadding),
+                  Row(
+                    children: [
+                      const Spacer(),
+                      Expanded(
+                        flex: 8,
+                        child: SvgPicture.asset("assets/icons/signup.svg"),
+                      ),
+                      const Spacer(),
+                    ],
+                  ),
+                  CustomTextField(
+                    onChange: (data) => email = data,
+                    isPassword: false,
+                    hintText: S.of(context).emailHint,
+                    prefixIcon: Icons.person,
+                  ),
+                  CustomTextField(
+                    onChange: (data) => password = data,
+                    isPassword: true,
+                    hintText: S.of(context).passwordHint,
+                    prefixIcon: Icons.lock,
+                    suffixIcon: Icons.visibility,
+                  ),
+                  CustomButton(
+                    color: kPrimaryColor,
+                    text: S.of(context).signupButton,
+                    textColor: kPrimaryLightColor,
+                    onPress: () {
+                      if (formKey.currentState!.validate()) {
+                        BlocProvider.of<SignUpCubit>(
+                          context,
+                        ).signUpMethod(email: email!, password: password!);
+                      } else {
+                        autovalidateMode = AutovalidateMode.always;
+                        setState(() {});
+                      }
+                    },
+                  ),
+                  const SizedBox(height: 3),
+                  AlreadyHaveAnAccount(
+                    login: false,
+                    onTap: () {
+                      Navigator.popAndPushNamed(context, kLoginView);
+                    },
+                  ),
                 ],
               ),
-              CustomTextField(
-                onChange: (data) {
-                  email = data;
-                },
-                isPassword: false,
-                hintText: S.of(context).emailHint,
-                prefixIcon: Icons.person,
-              ),
-              CustomTextField(
-                onChange: (data) {
-                  password = data;
-                },
-                isPassword: true,
-                hintText: S.of(context).passwordHint,
-                prefixIcon: Icons.lock,
-                suffixIcon: Icons.visibility,
-              ),
-              CustomButton(
-                color: kPrimaryColor,
-                text: S.of(context).signupButton,
-                textColor: kPrimaryLightColor,
-                onPress: () async {
-                  if (formKey.currentState!.validate()) {
-                    try {
-                      await signUpMethod();
-                      customSnakBatr(
-                        context,
-                        message: S.of(context).signUpSuccess,
-                        isSuccess: true,
-                      );
-                    } on FirebaseAuthException catch (e) {
-                      if (e.code == 'weak-password') {
-                        customSnakBatr(
-                          context,
-                          message: S.of(context).weakPassword,
-                        );
-                      } else if (e.code == 'email-already-in-use') {
-                        customSnakBatr(
-                          context,
-                          message: S.of(context).emailExist,
-                          isSuccess: true,
-                        );
-                      }
-                    } catch (e) {
-                      customSnakBatr(context, message: e.toString());
-                    }
-                  } else {
-                    autovalidateMode = AutovalidateMode.always;
-                    setState(() {});
-                  }
-                },
-              ),
-              SizedBox(height: 3),
-              AlreadyHaveAnAccount(
-                login: false,
-                onTap: () {
-                  Navigator.popAndPushNamed(context, kLoginView);
-                },
-              ),
-            ],
-          ),
-        ),
+            ),
+          );
+        },
       ),
     );
-  }
-
-  Future<void> signUpMethod() async {
-    UserCredential user = await FirebaseAuth.instance
-        .createUserWithEmailAndPassword(email: email!, password: password!);
   }
 }

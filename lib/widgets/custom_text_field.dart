@@ -65,7 +65,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
         return S.of(context).chekIsEmail;
       }
     } else if (data.length < 8) {
-      return widget.isPassword ? S.of(context).passwordLength : null;
+      return S.of(context).passwordLength;
     } else {
       return null;
     }
