@@ -16,6 +16,8 @@
     "signUpNavigator":"Sign Up",
     "weakPassword" : "weak password",
     "emailExist" : "This account already exist",
-    "signUpSuccess": "Sign up Successfully"
+    "signUpSuccess": "Sign up Successfully",
+    "inputRequiredValidator" : "This Field is required",
+    "passwordLength": "Must be 8 letters at lest"
 
 }

@@ -34,9 +34,15 @@ class MessageLookup extends MessageLookupByLibrary {
       "هذا الحساب موجود مسبقاً",
     ),
     "emailHint": MessageLookupByLibrary.simpleMessage("البريد الإلكتروني"),
+    "inputRequiredValidator": MessageLookupByLibrary.simpleMessage(
+      "هذا الحقل مطلوب",
+    ),
     "loginButton": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
     "logoutButton": MessageLookupByLibrary.simpleMessage("تسجيل الخروج"),
     "passwordHint": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
+    "passwordLength": MessageLookupByLibrary.simpleMessage(
+      "يجب أن يحتوي على ثمانية أحرف على الأقل",
+    ),
     "profileTitle": MessageLookupByLibrary.simpleMessage("الملف الشخصي"),
     "sendButton": MessageLookupByLibrary.simpleMessage("إرسال"),
     "settingsTitle": MessageLookupByLibrary.simpleMessage("الإعدادات"),

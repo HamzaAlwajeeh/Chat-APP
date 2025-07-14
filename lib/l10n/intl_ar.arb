@@ -16,5 +16,7 @@
     "signUpNavigator":"إنشاء حساب",
     "weak-password" : "كلمة مرور ضعيفة",
     "emailExist" : "هذا الحساب موجود مسبقاً",
-    "signUpSuccess": "تم إنشاء الحساب بنجاح"
+    "signUpSuccess": "تم إنشاء الحساب بنجاح",
+    "inputRequiredValidator" : "هذا الحقل مطلوب",
+    "passwordLength": "يجب أن يحتوي على ثمانية أحرف على الأقل"
 }

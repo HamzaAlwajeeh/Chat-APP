@@ -34,9 +34,15 @@ class MessageLookup extends MessageLookupByLibrary {
       "This account already exist",
     ),
     "emailHint": MessageLookupByLibrary.simpleMessage("Email"),
+    "inputRequiredValidator": MessageLookupByLibrary.simpleMessage(
+      "This Field is required",
+    ),
     "loginButton": MessageLookupByLibrary.simpleMessage("LOGIN"),
     "logoutButton": MessageLookupByLibrary.simpleMessage("LOGOUT"),
     "passwordHint": MessageLookupByLibrary.simpleMessage("Password"),
+    "passwordLength": MessageLookupByLibrary.simpleMessage(
+      "Must be 8 letters at lest",
+    ),
     "profileTitle": MessageLookupByLibrary.simpleMessage("Profile"),
     "sendButton": MessageLookupByLibrary.simpleMessage("Send"),
     "settingsTitle": MessageLookupByLibrary.simpleMessage("Settings"),

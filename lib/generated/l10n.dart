@@ -173,6 +173,26 @@ class S {
       args: [],
     );
   }
+
+  /// `This Field is required`
+  String get inputRequiredValidator {
+    return Intl.message(
+      'This Field is required',
+      name: 'inputRequiredValidator',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Must be 8 letters at lest`
+  String get passwordLength {
+    return Intl.message(
+      'Must be 8 letters at lest',
+      name: 'passwordLength',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -1,4 +1,5 @@
 import 'package:chat_app/constants/constants.dart';
+import 'package:chat_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 
 class CustomTextField extends StatefulWidget {
@@ -27,7 +28,16 @@ class _CustomTextFieldState extends State<CustomTextField> {
   Widget build(BuildContext context) {
     return SizedBox(
       width: 300,
-      child: TextField(
+      child: TextFormField(
+        validator: (data) {
+          if (data!.isEmpty) {
+            return S.of(context).inputRequiredValidator;
+          } else if (data.length < 8) {
+            return widget.isPassword ? S.of(context).passwordLength : null;
+          } else {
+            return null;
+          }
+        },
         onChanged: widget.onChange,
         style: TextStyle(fontWeight: FontWeight.bold, height: 1),
         obscureText: widget.isPassword ? (isVisable ? false : true) : false,

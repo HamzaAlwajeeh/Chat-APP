@@ -15,12 +15,14 @@ class SignUpView extends StatelessWidget {
 
   String? email;
   String? password;
+  GlobalKey<FormState> formKey = GlobalKey();
   @override
   Widget build(BuildContext context) {
     return Background(
       topImage: 'assets/images/signup_top.png',
       isLoginView: true,
       child: Form(
+        key: formKey,
         child: SingleChildScrollView(
           child: Column(
             spacing: defaultPadding,
@@ -63,28 +65,30 @@ class SignUpView extends StatelessWidget {
                 text: S.of(context).signupButton,
                 textColor: kPrimaryLightColor,
                 onPress: () async {
-                  try {
-                    await signUpMethod();
-                    customSnakBatr(
-                      context,
-                      message: S.of(context).signUpSuccess,
-                      isSuccess: true,
-                    );
-                  } on FirebaseAuthException catch (e) {
-                    if (e.code == 'weak-password') {
+                  if (formKey.currentState!.validate()) {
+                    try {
+                      await signUpMethod();
                       customSnakBatr(
                         context,
-                        message: S.of(context).weakPassword,
-                      );
-                    } else if (e.code == 'email-already-in-use') {
-                      customSnakBatr(
-                        context,
-                        message: S.of(context).emailExist,
+                        message: S.of(context).signUpSuccess,
                         isSuccess: true,
                       );
+                    } on FirebaseAuthException catch (e) {
+                      if (e.code == 'weak-password') {
+                        customSnakBatr(
+                          context,
+                          message: S.of(context).weakPassword,
+                        );
+                      } else if (e.code == 'email-already-in-use') {
+                        customSnakBatr(
+                          context,
+                          message: S.of(context).emailExist,
+                          isSuccess: true,
+                        );
+                      }
+                    } catch (e) {
+                      customSnakBatr(context, message: e.toString());
                     }
-                  } catch (e) {
-                    customSnakBatr(context, message: e.toString());
                   }
                 },
               ),
