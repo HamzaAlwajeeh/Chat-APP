@@ -18,5 +18,6 @@
     "emailExist" : "هذا الحساب موجود مسبقاً",
     "signUpSuccess": "تم إنشاء الحساب بنجاح",
     "inputRequiredValidator" : "هذا الحقل مطلوب",
-    "passwordLength": "يجب أن يحتوي على ثمانية أحرف على الأقل"
+    "passwordLength": "يجب أن يحتوي على ثمانية أحرف على الأقل",
+    "chekIsEmail" : "يجب أن يكون جيميل"
 }

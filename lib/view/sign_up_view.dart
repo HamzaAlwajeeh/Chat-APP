@@ -10,12 +10,22 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class SignUpView extends StatelessWidget {
-  SignUpView({super.key});
+class SignUpView extends StatefulWidget {
+  const SignUpView({super.key});
 
+  @override
+  State<SignUpView> createState() => _SignUpViewState();
+}
+
+class _SignUpViewState extends State<SignUpView> {
   String? email;
+
   String? password;
+
   GlobalKey<FormState> formKey = GlobalKey();
+
+  AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
+
   @override
   Widget build(BuildContext context) {
     return Background(
@@ -23,6 +33,7 @@ class SignUpView extends StatelessWidget {
       isLoginView: true,
       child: Form(
         key: formKey,
+        autovalidateMode: autovalidateMode,
         child: SingleChildScrollView(
           child: Column(
             spacing: defaultPadding,
@@ -89,6 +100,9 @@ class SignUpView extends StatelessWidget {
                     } catch (e) {
                       customSnakBatr(context, message: e.toString());
                     }
+                  } else {
+                    autovalidateMode = AutovalidateMode.always;
+                    setState(() {});
                   }
                 },
               ),

@@ -30,13 +30,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
       width: 300,
       child: TextFormField(
         validator: (data) {
-          if (data!.isEmpty) {
-            return S.of(context).inputRequiredValidator;
-          } else if (data.length < 8) {
-            return widget.isPassword ? S.of(context).passwordLength : null;
-          } else {
-            return null;
-          }
+          return buildInputValisator(data, context);
         },
         onChanged: widget.onChange,
         style: TextStyle(fontWeight: FontWeight.bold, height: 1),
@@ -53,12 +47,35 @@ class _CustomTextFieldState extends State<CustomTextField> {
             borderRadius: BorderRadius.all(Radius.circular(30)),
             borderSide: BorderSide.none,
           ),
+          focusedBorder: buildBorder(color: kPrimaryColor),
           contentPadding: EdgeInsets.symmetric(
             horizontal: defaultPadding + 4,
             vertical: defaultPadding + 4,
           ),
         ),
       ),
+    );
+  }
+
+  String? buildInputValisator(String? data, BuildContext context) {
+    if (data!.isEmpty) {
+      return S.of(context).inputRequiredValidator;
+    } else if (!widget.isPassword) {
+      if (!data.contains("@gmail.com")) {
+        return S.of(context).chekIsEmail;
+      }
+    } else if (data.length < 8) {
+      return widget.isPassword ? S.of(context).passwordLength : null;
+    } else {
+      return null;
+    }
+    return null;
+  }
+
+  OutlineInputBorder buildBorder({Color color = Colors.white}) {
+    return OutlineInputBorder(
+      borderRadius: BorderRadius.circular(30),
+      borderSide: BorderSide(color: color),
     );
   }
 

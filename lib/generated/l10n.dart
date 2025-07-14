@@ -193,6 +193,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Must be an email`
+  String get chekIsEmail {
+    return Intl.message(
+      'Must be an email',
+      name: 'chekIsEmail',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

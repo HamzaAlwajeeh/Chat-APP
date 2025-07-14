@@ -27,6 +27,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "appTitle": MessageLookupByLibrary.simpleMessage("تطبيق الدردشة"),
     "chatTitle": MessageLookupByLibrary.simpleMessage("الدردشة"),
+    "chekIsEmail": MessageLookupByLibrary.simpleMessage("يجب أن يكون جيميل"),
     "dontHaveAccountMessage": MessageLookupByLibrary.simpleMessage(
       "ليس لديك حساب ؟ ",
     ),
