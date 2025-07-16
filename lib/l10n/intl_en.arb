@@ -19,6 +19,9 @@
     "signUpSuccess": "Sign up Successfully",
     "inputRequiredValidator" : "This Field is required",
     "passwordLength": "Must be 8 letters at lest",
-    "chekIsEmail" : "Must be an email"
+    "chekIsEmail" : "Must be an email",
+    "signInSuccess" : "Sign in Successfully",
+    "userNotFound" : "User not found",
+    "wrongPassword" : "Wrong Password"
 
 }

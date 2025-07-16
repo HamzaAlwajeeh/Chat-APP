@@ -5,6 +5,6 @@ const kPrimaryLightColor = Color(0xFFF1E6FF);
 
 const double defaultPadding = 16.0;
 
-const String kHomeView = '/';
 const String kLoginView = '/login';
 const String kSignUpView = '/sign-up';
+const String kChatView = '/chat';

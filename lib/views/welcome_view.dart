@@ -1,12 +1,13 @@
 import 'package:chat_app/constants/constants.dart';
+import 'package:chat_app/gen/assets.gen.dart';
 import 'package:chat_app/generated/l10n.dart';
 import 'package:chat_app/widgets/back_ground.dart';
 import 'package:chat_app/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-class HomeView extends StatelessWidget {
-  const HomeView({super.key});
+class WelcomeView extends StatelessWidget {
+  const WelcomeView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,10 +23,7 @@ class HomeView extends StatelessWidget {
           Row(
             children: [
               const Spacer(),
-              Expanded(
-                flex: 8,
-                child: SvgPicture.asset("assets/icons/chat.svg"),
-              ),
+              Expanded(flex: 8, child: SvgPicture.asset(Assets.icons.chat)),
               const Spacer(),
             ],
           ),

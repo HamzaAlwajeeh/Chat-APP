@@ -47,15 +47,20 @@ class MessageLookup extends MessageLookupByLibrary {
     "profileTitle": MessageLookupByLibrary.simpleMessage("Profile"),
     "sendButton": MessageLookupByLibrary.simpleMessage("Send"),
     "settingsTitle": MessageLookupByLibrary.simpleMessage("Settings"),
+    "signInSuccess": MessageLookupByLibrary.simpleMessage(
+      "Sign in Successfully",
+    ),
     "signUpNavigator": MessageLookupByLibrary.simpleMessage("Sign Up"),
     "signUpSuccess": MessageLookupByLibrary.simpleMessage(
       "Sign up Successfully",
     ),
     "signinNavigator": MessageLookupByLibrary.simpleMessage("Sign In"),
     "signupButton": MessageLookupByLibrary.simpleMessage("SIGNUP"),
+    "userNotFound": MessageLookupByLibrary.simpleMessage("User not found"),
     "weakPassword": MessageLookupByLibrary.simpleMessage("weak password"),
     "welcomeMessage": MessageLookupByLibrary.simpleMessage(
       "Welcome to H-Talk app",
     ),
+    "wrongPassword": MessageLookupByLibrary.simpleMessage("Wrong Password"),
   };
 }

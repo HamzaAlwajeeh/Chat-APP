@@ -203,6 +203,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Sign in Successfully`
+  String get signInSuccess {
+    return Intl.message(
+      'Sign in Successfully',
+      name: 'signInSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `User not found`
+  String get userNotFound {
+    return Intl.message(
+      'User not found',
+      name: 'userNotFound',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Wrong Password`
+  String get wrongPassword {
+    return Intl.message(
+      'Wrong Password',
+      name: 'wrongPassword',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -47,14 +47,21 @@ class MessageLookup extends MessageLookupByLibrary {
     "profileTitle": MessageLookupByLibrary.simpleMessage("الملف الشخصي"),
     "sendButton": MessageLookupByLibrary.simpleMessage("إرسال"),
     "settingsTitle": MessageLookupByLibrary.simpleMessage("الإعدادات"),
+    "signInSuccess": MessageLookupByLibrary.simpleMessage(
+      "تم تسجيل الدخول بنجاح",
+    ),
     "signUpNavigator": MessageLookupByLibrary.simpleMessage("إنشاء حساب"),
     "signUpSuccess": MessageLookupByLibrary.simpleMessage(
       "تم إنشاء الحساب بنجاح",
     ),
     "signinNavigator": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
     "signupButton": MessageLookupByLibrary.simpleMessage("إنشاء حساب"),
+    "userNotFound": MessageLookupByLibrary.simpleMessage("المستخدم غير موجود"),
     "welcomeMessage": MessageLookupByLibrary.simpleMessage(
       "مرحبًا بك في تطبيق H-Talk",
+    ),
+    "wrongPassword": MessageLookupByLibrary.simpleMessage(
+      "كلمة المرور غير صحيحه",
     ),
   };
 }
