@@ -2,8 +2,8 @@ import 'package:chat_app/constants/constants.dart';
 import 'package:chat_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 
-class CustomTextField extends StatefulWidget {
-  CustomTextField({
+class CustomTextFormField extends StatefulWidget {
+  CustomTextFormField({
     super.key,
     required this.isPassword,
     required this.hintText,
@@ -19,10 +19,10 @@ class CustomTextField extends StatefulWidget {
   Function(String)? onChange;
 
   @override
-  State<CustomTextField> createState() => _CustomTextFieldState();
+  State<CustomTextFormField> createState() => _CustomTextFormFieldState();
 }
 
-class _CustomTextFieldState extends State<CustomTextField> {
+class _CustomTextFormFieldState extends State<CustomTextFormField> {
   bool isVisable = false;
   @override
   Widget build(BuildContext context) {

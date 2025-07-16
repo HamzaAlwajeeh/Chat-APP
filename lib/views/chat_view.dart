@@ -1,6 +1,7 @@
 import 'package:chat_app/constants/constants.dart';
 import 'package:chat_app/generated/l10n.dart';
 import 'package:chat_app/widgets/chat_bubble.dart';
+import 'package:chat_app/widgets/chat_text_field.dart';
 import 'package:flutter/material.dart';
 
 class ChatView extends StatelessWidget {
@@ -19,7 +20,18 @@ class ChatView extends StatelessWidget {
         centerTitle: true,
         backgroundColor: kPrimaryColor,
       ),
-      body: ChatBubble(),
+      body: Column(
+        children: [
+          Expanded(
+            child: ListView.builder(
+              itemBuilder: (context, index) {
+                return ChatBubble();
+              },
+            ),
+          ),
+          ChatTextField(),
+        ],
+      ),
     );
   }
 }

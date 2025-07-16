@@ -5,7 +5,7 @@ import 'package:chat_app/helper/custom_snak_bar.dart';
 import 'package:chat_app/widgets/already_have_an_account.dart';
 import 'package:chat_app/widgets/back_ground.dart';
 import 'package:chat_app/widgets/custom_button.dart';
-import 'package:chat_app/widgets/custom_text_field.dart';
+import 'package:chat_app/widgets/custom_text_form_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -56,13 +56,13 @@ class _SignUpViewState extends State<SignUpView> {
                   const Spacer(),
                 ],
               ),
-              CustomTextField(
+              CustomTextFormField(
                 onChange: (data) => email = data,
                 isPassword: false,
                 hintText: S.of(context).emailHint,
                 prefixIcon: Icons.person,
               ),
-              CustomTextField(
+              CustomTextFormField(
                 onChange: (data) => password = data,
                 isPassword: true,
                 hintText: S.of(context).passwordHint,
