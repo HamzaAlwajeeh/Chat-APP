@@ -1,6 +1,7 @@
 import 'package:chat_app/constants/constants.dart';
 import 'package:chat_app/models/message_model.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class ChatBubble extends StatelessWidget {
   const ChatBubble({super.key, required this.messageModel, required this.isMe});
@@ -30,7 +31,7 @@ class ChatBubble extends StatelessWidget {
             ),
             SizedBox(height: 5),
             Text(
-              '${messageModel.time.hour}:${messageModel.time.minute}',
+              DateFormat('hh:mm a').format(messageModel.time),
               style: TextStyle(
                 color: kPrimaryLightColor,
                 fontSize: 12,

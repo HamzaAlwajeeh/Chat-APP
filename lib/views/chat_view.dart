@@ -5,7 +5,6 @@ import 'package:chat_app/widgets/chat_bubble.dart';
 import 'package:chat_app/widgets/chat_text_field.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 class ChatView extends StatelessWidget {
   ChatView({super.key});
@@ -71,11 +70,5 @@ class ChatView extends StatelessWidget {
         }
       },
     );
-  }
-
-  String getCurrentTime() {
-    final now = DateTime.now();
-    final formatter = DateFormat('hh:mm a');
-    return formatter.format(now);
   }
 }
