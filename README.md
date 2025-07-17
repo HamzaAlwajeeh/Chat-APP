@@ -1,16 +1,90 @@
-# chat_app
+# H-Talk Chat App
 
-A new Flutter project.
+A modern, cross-platform chat application built with Flutter and Firebase. H-Talk supports real-time messaging, authentication, localization, and a beautiful UI for both Android and iOS.
+
+## Features
+
+- 🔥 Real-time chat using Firebase Firestore
+- 🔒 Secure authentication with Firebase Auth
+- 🌍 Multi-language support (English & Arabic)
+- 🎨 Custom UI components and theming
+- 📱 Responsive design for mobile devices
+- 🖼️ SVG and image assets for a rich experience
+- 🧪 Widget and integration tests
+
+## Screenshots
+
+![Welcome Screen](assets/images/main_top.png)
+![Chat Screen](assets/images/login_bottom.png)
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+### Prerequisites
 
-A few resources to get you started if this is your first Flutter project:
+- [Flutter SDK](https://flutter.dev/docs/get-started/install)
+- [Firebase Project](https://console.firebase.google.com/)
+- Android Studio or Xcode for mobile development
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### Installation
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+1. **Clone the repository:**
+   ```sh
+   git clone https://github.com/HamzaAlwajeeh/Chat-APP.git
+   cd chat_app
+   ```
+2. **Install dependencies:**
+   ```sh
+   flutter pub get
+   ```
+3. **Configure Firebase:**
+
+   - Add your `google-services.json` to `android/app/`
+   - Add your `GoogleService-Info.plist` to `ios/Runner/`
+   - Update Firebase settings in `lib/firebase_options.dart`
+
+4. **Run the app:**
+   ```sh
+   flutter run
+   ```
+
+## Project Structure
+
+```
+lib/
+  constants/         # App constants
+  gen/               # Generated assets
+  helper/            # Helper functions (snack bar, etc.)
+  models/            # Data models
+  routes/            # App routes
+  views/             # Screens (login, signup, chat, welcome)
+  widgets/           # Reusable widgets
+  generated/         # Localization files
+assets/
+  icons/             # SVG icons
+  images/            # PNG images
+android/ios/web/     # Platform-specific files
+```
+
+## Localization
+
+- English and Arabic translations are available in `lib/l10n/`.
+- Easily add more languages by updating `.arb` files and running the Flutter Intl plugin.
+
+## Testing
+
+- Run widget tests with:
+  ```sh
+  flutter test
+  ```
+
+## Contributing
+
+Pull requests are welcome! For major changes, please open an issue first to discuss what you would like to change.
+
+## License
+
+This project is licensed under the MIT License.
+
+---
+
+Made with ❤️ by Hamza Alwajeeh

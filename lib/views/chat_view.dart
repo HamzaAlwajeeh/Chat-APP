@@ -8,85 +8,94 @@ import 'package:flutter/material.dart';
 
 class ChatView extends StatelessWidget {
   ChatView({super.key});
-  CollectionReference messages = FirebaseFirestore.instance.collection(
+  final CollectionReference _messages = FirebaseFirestore.instance.collection(
     kMessagesCollection,
   );
-  TextEditingController controller = TextEditingController();
-  final scrolController = ScrollController();
+  final TextEditingController _controller = TextEditingController();
+  final ScrollController _scrollController = ScrollController();
   @override
   Widget build(BuildContext context) {
     final String currentEmail =
         ModalRoute.of(context)!.settings.arguments as String;
     return StreamBuilder<QuerySnapshot>(
-      stream: messages.orderBy(kCreatedAt, descending: true).snapshots(),
-      builder: (context, snapShot) {
-        if (snapShot.hasData) {
-          List<MessageModel> messagesList = [];
-          for (var message in snapShot.data!.docs) {
-            messagesList.add(MessageModel.fromJson(message));
-          }
-          return Scaffold(
-            backgroundColor: kPrimaryLightColor,
-            appBar: AppBar(
-              elevation: 0,
-              automaticallyImplyLeading: false,
-              title: Text(
-                S.of(context).appTitle,
-                style: TextStyle(color: kPrimaryLightColor),
-              ),
-              centerTitle: true,
-              backgroundColor: kPrimaryColor,
-            ),
-            body: Column(
-              children: [
-                Expanded(
-                  child: ListView.builder(
-                    physics: BouncingScrollPhysics(),
-                    reverse: true,
-                    controller: scrolController,
-                    itemCount: messagesList.length,
-                    itemBuilder: (context, index) {
-                      return ChatBubble(
-                        messageModel: messagesList[index],
-                        isMe:
-                            messagesList[index].email == currentEmail
-                                ? true
-                                : false,
-                      );
-                    },
-                  ),
-                ),
-                ChatTextField(
-                  onPressed: () {
-                    sendMessage(controller.text, currentEmail);
-                    controller.clear();
-                  },
-                  controller: controller,
-                  onSubmitted: (data) {
-                    sendMessage(data, currentEmail);
-                    controller.clear();
-                    scrolController.animateTo(
-                      0,
-                      duration: Duration(microseconds: 500),
-                      curve: Curves.easeIn,
-                    );
-                  },
-                ),
-              ],
-            ),
+      stream: _messages.orderBy(kCreatedAt, descending: true).snapshots(),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) {
+          return const Center(
+            child: CircularProgressIndicator(color: kPrimaryColor),
           );
-        } else {
-          return Center(child: CircularProgressIndicator(color: kPrimaryColor));
         }
+        final messagesList =
+            snapshot.data!.docs
+                .map((doc) => MessageModel.fromJson(doc))
+                .toList();
+        return Scaffold(
+          backgroundColor: kPrimaryLightColor,
+          appBar: _buildAppBar(context),
+          body: Column(
+            children: [
+              Expanded(child: _buildMessagesList(messagesList, currentEmail)),
+              _buildChatTextField(currentEmail),
+            ],
+          ),
+        );
       },
     );
   }
 
-  void sendMessage(String data, String currentEmail) {
-    messages.add({
-      kMessage: data,
-      kCreatedAt: DateTime.now(),
-      kEmail: currentEmail,
-    });
+  void _sendMessage(String text, String email) {
+    if (text.trim().isEmpty) return;
+    _messages.add({kMessage: text, kCreatedAt: DateTime.now(), kEmail: email});
+  }
+
+  PreferredSizeWidget _buildAppBar(BuildContext context) {
+    return AppBar(
+      elevation: 0,
+      automaticallyImplyLeading: false,
+      title: Text(
+        S.of(context).appTitle,
+        style: const TextStyle(color: kPrimaryLightColor),
+      ),
+      centerTitle: true,
+      backgroundColor: kPrimaryColor,
+    );
+  }
+
+  Widget _buildMessagesList(
+    List<MessageModel> messagesList,
+    String currentEmail,
+  ) {
+    return ListView.builder(
+      physics: const BouncingScrollPhysics(),
+      reverse: true,
+      controller: _scrollController,
+      itemCount: messagesList.length,
+      itemBuilder: (context, index) {
+        final message = messagesList[index];
+        return ChatBubble(
+          messageModel: message,
+          isMe: message.email == currentEmail,
+        );
+      },
+    );
+  }
+
+  Widget _buildChatTextField(String currentEmail) {
+    return ChatTextField(
+      controller: _controller,
+      onPressed: () {
+        _sendMessage(_controller.text, currentEmail);
+        _controller.clear();
+      },
+      onSubmitted: (text) {
+        _sendMessage(text, currentEmail);
+        _controller.clear();
+        _scrollController.animateTo(
+          0,
+          duration: const Duration(milliseconds: 500),
+          curve: Curves.easeIn,
+        );
+      },
+    );
   }
 }
