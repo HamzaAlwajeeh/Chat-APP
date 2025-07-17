@@ -31,7 +31,7 @@ class ChatView extends StatelessWidget {
               elevation: 0,
               automaticallyImplyLeading: false,
               title: Text(
-                S.of(context).chatTitle,
+                S.of(context).appTitle,
                 style: TextStyle(color: kPrimaryLightColor),
               ),
               centerTitle: true,
@@ -41,6 +41,7 @@ class ChatView extends StatelessWidget {
               children: [
                 Expanded(
                   child: ListView.builder(
+                    physics: BouncingScrollPhysics(),
                     reverse: true,
                     controller: scrolController,
                     itemCount: messagesList.length,

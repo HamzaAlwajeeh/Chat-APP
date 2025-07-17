@@ -25,7 +25,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "alreadyHaveAccountMessage": MessageLookupByLibrary.simpleMessage(
       "Already have an Account ? ",
     ),
-    "appTitle": MessageLookupByLibrary.simpleMessage("HM Chat"),
+    "appTitle": MessageLookupByLibrary.simpleMessage("H-Talk"),
     "chatTitle": MessageLookupByLibrary.simpleMessage("Chat"),
     "chekIsEmail": MessageLookupByLibrary.simpleMessage("Must be an email"),
     "dontHaveAccountMessage": MessageLookupByLibrary.simpleMessage(

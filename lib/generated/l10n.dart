@@ -54,9 +54,9 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
-  /// `HM Chat`
+  /// `H-Talk`
   String get appTitle {
-    return Intl.message('HM Chat', name: 'appTitle', desc: '', args: []);
+    return Intl.message('H-Talk', name: 'appTitle', desc: '', args: []);
   }
 
   /// `Welcome to H-Talk app`
