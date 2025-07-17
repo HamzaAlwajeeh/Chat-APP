@@ -3,9 +3,15 @@ import 'package:chat_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 
 class ChatTextField extends StatelessWidget {
-  const ChatTextField({super.key, this.onSubmitted, required this.controller});
+  const ChatTextField({
+    super.key,
+    this.onSubmitted,
+    required this.controller,
+    this.onPressed,
+  });
   final void Function(String)? onSubmitted;
   final TextEditingController controller;
+  final void Function()? onPressed;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -19,7 +25,10 @@ class ChatTextField extends StatelessWidget {
             vertical: 18,
             horizontal: 16,
           ),
-          suffixIcon: Icon(Icons.send, color: kPrimaryColor),
+          suffixIcon: IconButton(
+            onPressed: onPressed,
+            icon: Icon(Icons.send, color: kPrimaryColor),
+          ),
           hintText: S.of(context).sendMessagehint,
           hintStyle: TextStyle(
             fontWeight: FontWeight.bold,

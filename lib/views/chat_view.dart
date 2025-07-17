@@ -12,12 +12,13 @@ class ChatView extends StatelessWidget {
     kMessagesCollection,
   );
   TextEditingController controller = TextEditingController();
+  final scrolController = ScrollController();
   @override
   Widget build(BuildContext context) {
     final String currentEmail =
         ModalRoute.of(context)!.settings.arguments as String;
-    return FutureBuilder<QuerySnapshot>(
-      future: messages.get(),
+    return StreamBuilder<QuerySnapshot>(
+      stream: messages.orderBy(kCreatedAt, descending: true).snapshots(),
       builder: (context, snapShot) {
         if (snapShot.hasData) {
           List<MessageModel> messagesList = [];
@@ -27,6 +28,7 @@ class ChatView extends StatelessWidget {
           return Scaffold(
             backgroundColor: kPrimaryLightColor,
             appBar: AppBar(
+              elevation: 0,
               automaticallyImplyLeading: false,
               title: Text(
                 S.of(context).chatTitle,
@@ -39,6 +41,8 @@ class ChatView extends StatelessWidget {
               children: [
                 Expanded(
                   child: ListView.builder(
+                    reverse: true,
+                    controller: scrolController,
                     itemCount: messagesList.length,
                     itemBuilder: (context, index) {
                       return ChatBubble(
@@ -52,14 +56,19 @@ class ChatView extends StatelessWidget {
                   ),
                 ),
                 ChatTextField(
+                  onPressed: () {
+                    sendMessage(controller.text, currentEmail);
+                    controller.clear();
+                  },
                   controller: controller,
                   onSubmitted: (data) {
-                    messages.add({
-                      kMessage: data,
-                      kCreatedAt: DateTime.now(),
-                      kEmail: currentEmail,
-                    });
+                    sendMessage(data, currentEmail);
                     controller.clear();
+                    scrolController.animateTo(
+                      0,
+                      duration: Duration(microseconds: 500),
+                      curve: Curves.easeIn,
+                    );
                   },
                 ),
               ],
@@ -70,5 +79,13 @@ class ChatView extends StatelessWidget {
         }
       },
     );
+  }
+
+  void sendMessage(String data, String currentEmail) {
+    messages.add({
+      kMessage: data,
+      kCreatedAt: DateTime.now(),
+      kEmail: currentEmail,
+    });
   }
 }
