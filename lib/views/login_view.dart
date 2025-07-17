@@ -85,7 +85,11 @@ class _LoginViewState extends State<LoginView> {
                             message: S.of(context).signInSuccess,
                           );
 
-                          Navigator.popAndPushNamed(context, kChatView);
+                          Navigator.popAndPushNamed(
+                            context,
+                            kChatView,
+                            arguments: email,
+                          );
                         } on FirebaseAuthException catch (e) {
                           if (e.code == 'user-not-found') {
                             customSnakBatr(

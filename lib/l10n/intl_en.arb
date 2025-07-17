@@ -22,6 +22,7 @@
     "chekIsEmail" : "Must be an email",
     "signInSuccess" : "Sign in Successfully",
     "userNotFound" : "User not found",
-    "wrongPassword" : "Wrong Password"
+    "wrongPassword" : "Wrong Password",
+    "sendMessagehint" : "Send message"
 
 }

@@ -22,5 +22,6 @@
     "chekIsEmail" : "يجب أن يكون جيميل",
     "signInSuccess" : "تم تسجيل الدخول بنجاح",
     "userNotFound" : "المستخدم غير موجود",
-    "wrongPassword" : "كلمة المرور غير صحيحه"
+    "wrongPassword" : "كلمة المرور غير صحيحه",
+    "sendMessagehint" : "مراسلة"
 }

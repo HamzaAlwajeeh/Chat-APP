@@ -233,6 +233,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Send message`
+  String get sendMessagehint {
+    return Intl.message(
+      'Send message',
+      name: 'sendMessagehint',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

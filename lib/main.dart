@@ -30,7 +30,7 @@ class ChatApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'H-Talk app',
       theme: themeData(),
-      home: const WelcomeView(),
+      home: WelcomeView(),
       routes: routes,
     );
   }

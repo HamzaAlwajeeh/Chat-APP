@@ -46,6 +46,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "profileTitle": MessageLookupByLibrary.simpleMessage("الملف الشخصي"),
     "sendButton": MessageLookupByLibrary.simpleMessage("إرسال"),
+    "sendMessagehint": MessageLookupByLibrary.simpleMessage("مراسلة"),
     "settingsTitle": MessageLookupByLibrary.simpleMessage("الإعدادات"),
     "signInSuccess": MessageLookupByLibrary.simpleMessage(
       "تم تسجيل الدخول بنجاح",

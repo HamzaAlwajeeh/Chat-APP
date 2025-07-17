@@ -1,31 +1,43 @@
 import 'package:chat_app/constants/constants.dart';
+import 'package:chat_app/models/message_model.dart';
 import 'package:flutter/material.dart';
 
 class ChatBubble extends StatelessWidget {
-  const ChatBubble({super.key});
-
+  const ChatBubble({super.key, required this.messageModel, required this.isMe});
+  final MessageModel messageModel;
+  final bool isMe;
   @override
   Widget build(BuildContext context) {
     return Align(
-      alignment: Alignment.centerLeft,
+      alignment: isMe ? Alignment.centerLeft : Alignment.centerRight,
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 6, horizontal: 12),
-        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+        padding: const EdgeInsets.only(top: 12, bottom: 6, left: 12, right: 12),
         constraints: BoxConstraints(
           maxWidth: MediaQuery.of(context).size.width * 0.75,
         ),
         decoration: BoxDecoration(
-          color: kPrimaryColor,
-          borderRadius: BorderRadius.only(
-            topLeft: const Radius.circular(16),
-            topRight: const Radius.circular(16),
-            bottomRight: Radius.circular(16),
-            bottomLeft: Radius.circular(0),
-          ),
+          color: isMe ? kPrimaryColor : Color(0xff006D84),
+          borderRadius: BorderRadius.circular(16),
         ),
-        child: Text(
-          "Hamza Yahya Abdo Alwajeeh",
-          style: TextStyle(color: Colors.white, fontSize: 18, height: 1.2),
+        child: Column(
+          crossAxisAlignment:
+              isMe ? CrossAxisAlignment.start : CrossAxisAlignment.end,
+          children: [
+            Text(
+              messageModel.message,
+              style: TextStyle(color: Colors.white, fontSize: 18, height: 1.2),
+            ),
+            SizedBox(height: 5),
+            Text(
+              '${messageModel.time.hour}:${messageModel.time.minute}',
+              style: TextStyle(
+                color: kPrimaryLightColor,
+                fontSize: 12,
+                height: 1.2,
+              ),
+            ),
+          ],
         ),
       ),
     );
