@@ -1,6 +1,11 @@
-# H-Talk Chat App
+<div align="center">
+  <h1>H-Talk Chat App</h1>
+</div>
 
 A modern, cross-platform chat application built with Flutter and Firebase. H-Talk supports real-time messaging, authentication, localization, and a beautiful UI for both Android and iOS.
+
+**SDK Version:** Flutter 3.7.2  
+**Languages Used:** Dart, English, Arabic
 
 ## Features
 
