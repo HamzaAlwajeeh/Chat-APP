@@ -1,7 +1,9 @@
 import 'package:chat_app/constants/constants.dart';
+import 'package:chat_app/cubits/languge_cubit/language_cubit.dart';
 import 'package:chat_app/generated/l10n.dart';
 import 'package:chat_app/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class WelcomeButtons extends StatelessWidget {
   const WelcomeButtons({super.key});
@@ -41,14 +43,18 @@ class WelcomeButtons extends StatelessWidget {
                 width: 145,
                 color: kPrimaryColor,
                 text: S.of(context).en,
-                onPress: () {},
+                onPress: () async {
+                  changeLanguage(context, 'en');
+                },
                 textColor: kPrimaryLightColor,
               ),
               CustomButton(
                 width: 145,
                 color: kPrimaryLightColor,
                 text: S.of(context).ar,
-                onPress: () {},
+                onPress: () async {
+                  changeLanguage(context, 'ar');
+                },
                 textColor: kPrimaryColor,
               ),
             ],
@@ -56,5 +62,9 @@ class WelcomeButtons extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  void changeLanguage(BuildContext context, String language) {
+    BlocProvider.of<LanguageCubit>(context).changeLanguage(language: language);
   }
 }

@@ -1,4 +1,6 @@
 import 'package:chat_app/constants/constants.dart';
+import 'package:chat_app/cubits/languge_cubit/language_cubit.dart';
+import 'package:chat_app/cubits/languge_cubit/language_state.dart';
 import 'package:chat_app/cubits/login_cubit/login_cubit.dart';
 import 'package:chat_app/cubits/sign_up_cubit/sign_up_cubit.dart';
 import 'package:chat_app/firebase_options.dart';
@@ -9,37 +11,51 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  runApp(const ChatApp());
+
+  SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+  final savedLang = sharedPreferences.getString('language') ?? 'en';
+
+  runApp(ChatApp(savedLang: savedLang));
 }
 
 class ChatApp extends StatelessWidget {
-  const ChatApp({super.key});
+  final String savedLang;
+  const ChatApp({super.key, required this.savedLang});
 
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => LoginCubit()),
-        BlocProvider(create: (context) => SignUpCubit()),
+        BlocProvider(create: (_) => LoginCubit()),
+        BlocProvider(create: (_) => SignUpCubit()),
+        BlocProvider(
+          create: (_) => LanguageCubit()..changeLanguage(language: savedLang),
+        ),
       ],
-      child: MaterialApp(
-        locale: Locale('ar'),
-        localizationsDelegates: [
-          S.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        supportedLocales: S.delegate.supportedLocales,
-        debugShowCheckedModeBanner: false,
-        title: 'H-Talk app',
-        theme: themeData(),
-        home: WelcomeView(),
-        routes: routes,
+      child: BlocBuilder<LanguageCubit, LanguageState>(
+        builder: (context, state) {
+          final lang = (state is LanguageChanged) ? state.language : savedLang;
+          return MaterialApp(
+            locale: Locale(lang),
+            supportedLocales: S.delegate.supportedLocales,
+            localizationsDelegates: const [
+              S.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            debugShowCheckedModeBanner: false,
+            title: 'H-Talk app',
+            theme: themeData(),
+            home: const WelcomeView(),
+            routes: routes,
+          );
+        },
       ),
     );
   }
