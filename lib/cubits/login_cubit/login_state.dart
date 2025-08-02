@@ -1,6 +1,5 @@
-part of 'login_cubit.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-@immutable
 abstract class LoginState {}
 
 class LoginInitial extends LoginState {}

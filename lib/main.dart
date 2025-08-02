@@ -1,10 +1,12 @@
 import 'package:chat_app/constants/constants.dart';
+import 'package:chat_app/cubits/login_cubit/login_cubit.dart';
 import 'package:chat_app/firebase_options.dart';
 import 'package:chat_app/generated/l10n.dart';
 import 'package:chat_app/routes/app_route.dart';
 import 'package:chat_app/views/welcome_view.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() async {
@@ -18,20 +20,23 @@ class ChatApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      locale: Locale('en'),
-      localizationsDelegates: [
-        S.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      supportedLocales: S.delegate.supportedLocales,
-      debugShowCheckedModeBanner: false,
-      title: 'H-Talk app',
-      theme: themeData(),
-      home: WelcomeView(),
-      routes: routes,
+    return MultiBlocProvider(
+      providers: [BlocProvider(create: (context) => LoginCubit())],
+      child: MaterialApp(
+        locale: Locale('en'),
+        localizationsDelegates: [
+          S.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: S.delegate.supportedLocales,
+        debugShowCheckedModeBanner: false,
+        title: 'H-Talk app',
+        theme: themeData(),
+        home: WelcomeView(),
+        routes: routes,
+      ),
     );
   }
 
