@@ -96,6 +96,7 @@ class _LoginViewState extends State<LoginView> {
                           backgroundColor: kPrimaryColor,
                         )
                         : CustomButton(
+                          width: 300,
                           onPress: () async {
                             if (formKey.currentState!.validate()) {
                               BlocProvider.of<LoginCubit>(context).login(

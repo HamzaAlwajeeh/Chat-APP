@@ -22,10 +22,12 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "Language": MessageLookupByLibrary.simpleMessage("Language"),
     "alreadyHaveAccountMessage": MessageLookupByLibrary.simpleMessage(
       "Already have an Account ? ",
     ),
     "appTitle": MessageLookupByLibrary.simpleMessage("H-Talk"),
+    "ar": MessageLookupByLibrary.simpleMessage("العربية"),
     "chatTitle": MessageLookupByLibrary.simpleMessage("Chat"),
     "chekIsEmail": MessageLookupByLibrary.simpleMessage("Must be an email"),
     "dontHaveAccountMessage": MessageLookupByLibrary.simpleMessage(
@@ -35,6 +37,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "This account already exist",
     ),
     "emailHint": MessageLookupByLibrary.simpleMessage("Email"),
+    "en": MessageLookupByLibrary.simpleMessage("English"),
     "inputRequiredValidator": MessageLookupByLibrary.simpleMessage(
       "This Field is required",
     ),

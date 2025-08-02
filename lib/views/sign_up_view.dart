@@ -87,6 +87,7 @@ class _SignUpViewState extends State<SignUpView> {
                           backgroundColor: kPrimaryColor,
                         )
                         : CustomButton(
+                          width: 300,
                           color: kPrimaryColor,
                           text: S.of(context).signupButton,
                           textColor: kPrimaryLightColor,

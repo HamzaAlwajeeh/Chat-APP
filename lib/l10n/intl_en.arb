@@ -23,6 +23,8 @@
     "signInSuccess" : "Sign in Successfully",
     "userNotFound" : "User not found",
     "wrongPassword" : "Wrong Password",
-    "sendMessagehint" : "Send message"
-
+    "sendMessagehint" : "Send message",
+    "Language" : "Language",
+    "en" : "English",
+    "ar" : "العربية"
 }

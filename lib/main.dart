@@ -27,7 +27,7 @@ class ChatApp extends StatelessWidget {
         BlocProvider(create: (context) => SignUpCubit()),
       ],
       child: MaterialApp(
-        locale: Locale('en'),
+        locale: Locale('ar'),
         localizationsDelegates: [
           S.delegate,
           GlobalMaterialLocalizations.delegate,
