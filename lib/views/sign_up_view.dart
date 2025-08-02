@@ -1,6 +1,5 @@
 import 'package:chat_app/constants/constants.dart';
-import 'package:chat_app/cubits/sign_up_cubit/sign_up_cubit.dart';
-import 'package:chat_app/cubits/sign_up_cubit/sign_up_state.dart';
+import 'package:chat_app/cubits/auth_cubit/auth_cubit.dart';
 import 'package:chat_app/gen/assets.gen.dart';
 import 'package:chat_app/generated/l10n.dart';
 import 'package:chat_app/helper/custom_snak_bar.dart';
@@ -32,7 +31,7 @@ class _SignUpViewState extends State<SignUpView> {
     return Background(
       topImage: 'assets/images/signup_top.png',
       isLoginView: true,
-      child: BlocConsumer<SignUpCubit, SignUpState>(
+      child: BlocConsumer<AuthCubit, AuthState>(
         listener: (context, state) {
           if (state is SignUpSuccess) {
             customSnakBatr(context, message: S.of(context).signUpSuccess);
@@ -93,7 +92,7 @@ class _SignUpViewState extends State<SignUpView> {
                           textColor: kPrimaryLightColor,
                           onPress: () async {
                             if (formKey.currentState!.validate()) {
-                              BlocProvider.of<SignUpCubit>(context).signUp(
+                              BlocProvider.of<AuthCubit>(context).signUp(
                                 context,
                                 email: email!,
                                 password: password!,

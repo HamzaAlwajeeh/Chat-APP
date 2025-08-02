@@ -1,14 +1,15 @@
-import 'package:chat_app/cubits/login_cubit/login_state.dart';
+import 'package:bloc/bloc.dart';
 import 'package:chat_app/generated/l10n.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter/material.dart';
 
-class LoginCubit extends Cubit<LoginState> {
-  LoginCubit() : super(LoginInitial());
+part 'auth_state.dart';
 
+class AuthCubit extends Cubit<AuthState> {
+  AuthCubit() : super(AuthInitial());
+
+  //Login Cubit
   UserCredential? user;
-
   Future<void> login(
     BuildContext context, {
     required String email,
@@ -28,8 +29,32 @@ class LoginCubit extends Cubit<LoginState> {
     }
   }
 
+  //SignUp Cubit
+  signUp(
+    BuildContext context, {
+    required String email,
+    required String password,
+  }) async {
+    emit(SignUpLoading());
+    try {
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      emit(SignUpSuccess());
+    } on FirebaseAuthException catch (e) {
+      emit(SignUpFailure(errorMessage: _getErrorMessage(e, context)));
+    } catch (e) {
+      emit(SignUpFailure(errorMessage: e.toString()));
+    }
+  }
+
   String _getErrorMessage(FirebaseAuthException e, BuildContext context) {
     switch (e.code) {
+      case 'weak-password':
+        return S.of(context).weakPassword;
+      case 'email-already-in-use':
+        return S.of(context).emailExist;
       case 'user-not-found':
         return S.of(context).userNotFound;
       case 'wrong-password':

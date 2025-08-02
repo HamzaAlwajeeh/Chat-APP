@@ -1,8 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:chat_app/constants/constants.dart';
+import 'package:chat_app/cubits/auth_cubit/auth_cubit.dart';
 import 'package:chat_app/cubits/chat_cubit/chat_cubit.dart';
-import 'package:chat_app/cubits/login_cubit/login_cubit.dart';
-import 'package:chat_app/cubits/login_cubit/login_state.dart';
 import 'package:chat_app/gen/assets.gen.dart';
 import 'package:chat_app/generated/l10n.dart';
 import 'package:chat_app/helper/custom_snak_bar.dart';
@@ -34,7 +33,7 @@ class _LoginViewState extends State<LoginView> {
   Widget build(BuildContext context) {
     return Background(
       isLoginView: true,
-      child: BlocConsumer<LoginCubit, LoginState>(
+      child: BlocConsumer<AuthCubit, AuthState>(
         listener: (context, state) {
           if (state is LoginSuccess) {
             customSnakBatr(context, message: S.of(context).signInSuccess);
@@ -101,7 +100,7 @@ class _LoginViewState extends State<LoginView> {
                           width: 300,
                           onPress: () async {
                             if (formKey.currentState!.validate()) {
-                              BlocProvider.of<LoginCubit>(context).login(
+                              BlocProvider.of<AuthCubit>(context).login(
                                 context,
                                 email: email!,
                                 password: password!,
