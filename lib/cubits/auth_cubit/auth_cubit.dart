@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:chat_app/generated/l10n.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -62,5 +64,11 @@ class AuthCubit extends Cubit<AuthState> {
       default:
         return e.message ?? e.code;
     }
+  }
+
+  @override
+  void onChange(Change<AuthState> change) {
+    super.onChange(change);
+    log('$change');
   }
 }
