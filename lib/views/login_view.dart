@@ -36,6 +36,7 @@ class _LoginViewState extends State<LoginView> {
       child: BlocConsumer<LoginCubit, LoginState>(
         listener: (context, state) {
           if (state is LoginSuccess) {
+            customSnakBatr(context, message: S.of(context).signInSuccess);
             Navigator.popAndPushNamed(
               context,
               kChatView,
