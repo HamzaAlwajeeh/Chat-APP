@@ -1,4 +1,5 @@
 import 'package:chat_app/constants/constants.dart';
+import 'package:chat_app/cubits/chat_cubit/chat_cubit.dart';
 import 'package:chat_app/cubits/languge_cubit/language_cubit.dart';
 import 'package:chat_app/cubits/languge_cubit/language_state.dart';
 import 'package:chat_app/cubits/login_cubit/login_cubit.dart';
@@ -36,6 +37,7 @@ class ChatApp extends StatelessWidget {
         BlocProvider(
           create: (_) => LanguageCubit()..changeLanguage(language: savedLang),
         ),
+        BlocProvider(create: (_) => ChatCubit()),
       ],
       child: BlocBuilder<LanguageCubit, LanguageState>(
         builder: (context, state) {

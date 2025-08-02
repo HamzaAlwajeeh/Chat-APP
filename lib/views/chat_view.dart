@@ -1,51 +1,30 @@
 import 'package:chat_app/constants/constants.dart';
+import 'package:chat_app/cubits/chat_cubit/chat_cubit.dart';
+import 'package:chat_app/cubits/chat_cubit/chat_state.dart';
 import 'package:chat_app/generated/l10n.dart';
-import 'package:chat_app/models/message_model.dart';
 import 'package:chat_app/widgets/chat_bubble.dart';
 import 'package:chat_app/widgets/chat_text_field.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ChatView extends StatelessWidget {
   ChatView({super.key});
-  final CollectionReference _messages = FirebaseFirestore.instance.collection(
-    kMessagesCollection,
-  );
   final TextEditingController _controller = TextEditingController();
   final ScrollController _scrollController = ScrollController();
   @override
   Widget build(BuildContext context) {
     final String currentEmail =
         ModalRoute.of(context)!.settings.arguments as String;
-    return StreamBuilder<QuerySnapshot>(
-      stream: _messages.orderBy(kCreatedAt, descending: true).snapshots(),
-      builder: (context, snapshot) {
-        if (!snapshot.hasData) {
-          return const Center(
-            child: CircularProgressIndicator(color: kPrimaryColor),
-          );
-        }
-        final messagesList =
-            snapshot.data!.docs
-                .map((doc) => MessageModel.fromJson(doc))
-                .toList();
-        return Scaffold(
-          backgroundColor: kPrimaryLightColor,
-          appBar: _buildAppBar(context),
-          body: Column(
-            children: [
-              Expanded(child: _buildMessagesList(messagesList, currentEmail)),
-              _buildChatTextField(currentEmail),
-            ],
-          ),
-        );
-      },
+    return Scaffold(
+      backgroundColor: kPrimaryLightColor,
+      appBar: _buildAppBar(context),
+      body: Column(
+        children: [
+          Expanded(child: _buildMessagesList(currentEmail)),
+          _buildChatTextField(currentEmail),
+        ],
+      ),
     );
-  }
-
-  void _sendMessage(String text, String email) {
-    if (text.trim().isEmpty) return;
-    _messages.add({kMessage: text, kCreatedAt: DateTime.now(), kEmail: email});
   }
 
   PreferredSizeWidget _buildAppBar(BuildContext context) {
@@ -61,41 +40,60 @@ class ChatView extends StatelessWidget {
     );
   }
 
-  Widget _buildMessagesList(
-    List<MessageModel> messagesList,
-    String currentEmail,
-  ) {
-    return ListView.builder(
-      physics: const BouncingScrollPhysics(),
-      reverse: true,
-      controller: _scrollController,
-      itemCount: messagesList.length,
-      itemBuilder: (context, index) {
-        final message = messagesList[index];
-        return ChatBubble(
-          messageModel: message,
-          isMe: message.email == currentEmail,
+  Widget _buildMessagesList(String currentEmail) {
+    return BlocBuilder<ChatCubit, ChatState>(
+      builder: (context, state) {
+        var messagesList = BlocProvider.of<ChatCubit>(context).messagesList;
+        return ListView.builder(
+          physics: const BouncingScrollPhysics(),
+          reverse: true,
+          controller: _scrollController,
+          itemCount: messagesList.length,
+          itemBuilder: (context, index) {
+            var message = messagesList[index];
+            return ChatBubble(
+              messageModel: message,
+              isMe: message.email == currentEmail,
+            );
+          },
         );
       },
     );
   }
 
   Widget _buildChatTextField(String currentEmail) {
-    return ChatTextField(
-      controller: _controller,
-      onPressed: () {
-        _sendMessage(_controller.text, currentEmail);
-        _controller.clear();
-      },
-      onSubmitted: (text) {
-        _sendMessage(text, currentEmail);
-        _controller.clear();
-        _scrollController.animateTo(
-          0,
-          duration: const Duration(milliseconds: 500),
-          curve: Curves.easeIn,
+    return Builder(
+      builder: (context) {
+        return ChatTextField(
+          controller: _controller,
+          onPressed: () {
+            sendMesage(
+              context,
+              text: _controller.text,
+              currentEmail: currentEmail,
+            );
+          },
+          onSubmitted: (text) {
+            sendMesage(context, text: text, currentEmail: currentEmail);
+          },
         );
       },
+    );
+  }
+
+  void sendMesage(
+    BuildContext context, {
+    required String text,
+    required String currentEmail,
+  }) {
+    BlocProvider.of<ChatCubit>(
+      context,
+    ).sendMessage(message: text, email: currentEmail);
+    _controller.clear();
+    _scrollController.animateTo(
+      0,
+      duration: const Duration(milliseconds: 500),
+      curve: Curves.easeIn,
     );
   }
 }

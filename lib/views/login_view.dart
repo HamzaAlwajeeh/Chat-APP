@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:chat_app/constants/constants.dart';
+import 'package:chat_app/cubits/chat_cubit/chat_cubit.dart';
 import 'package:chat_app/cubits/login_cubit/login_cubit.dart';
 import 'package:chat_app/cubits/login_cubit/login_state.dart';
 import 'package:chat_app/gen/assets.gen.dart';
@@ -37,6 +38,7 @@ class _LoginViewState extends State<LoginView> {
         listener: (context, state) {
           if (state is LoginSuccess) {
             customSnakBatr(context, message: S.of(context).signInSuccess);
+            BlocProvider.of<ChatCubit>(context).getMessages();
             Navigator.popAndPushNamed(
               context,
               kChatView,
