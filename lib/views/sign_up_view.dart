@@ -1,5 +1,4 @@
 import 'package:chat_app/constants/constants.dart';
-import 'package:chat_app/cubits/login_cubit/login_state.dart';
 import 'package:chat_app/cubits/sign_up_cubit/sign_up_cubit.dart';
 import 'package:chat_app/cubits/sign_up_cubit/sign_up_state.dart';
 import 'package:chat_app/gen/assets.gen.dart';
@@ -33,9 +32,9 @@ class _SignUpViewState extends State<SignUpView> {
     return Background(
       topImage: 'assets/images/signup_top.png',
       isLoginView: true,
-      child: BlocConsumer(
+      child: BlocConsumer<SignUpCubit, SignUpState>(
         listener: (context, state) {
-          if (state is LoginSuccess) {
+          if (state is SignUpSuccess) {
             customSnakBatr(context, message: S.of(context).signUpSuccess);
             Navigator.popAndPushNamed(context, kLoginView);
           } else if (state is SignUpFailure) {
