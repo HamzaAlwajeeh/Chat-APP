@@ -2,7 +2,7 @@ import 'package:chat_app/constants/constants.dart';
 import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
-  CustomButton({
+  const CustomButton({
     super.key,
     required this.onPress,
     required this.color,
@@ -10,11 +10,11 @@ class CustomButton extends StatelessWidget {
     required this.textColor,
     required this.width,
   });
-  void Function() onPress;
-  Color color;
-  String text;
-  Color textColor;
-  double width;
+  final void Function() onPress;
+  final Color color;
+  final String text;
+  final Color textColor;
+  final double width;
 
   @override
   Widget build(BuildContext context) {

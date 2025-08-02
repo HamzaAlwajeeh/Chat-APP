@@ -3,7 +3,7 @@ import 'package:chat_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 
 class CustomTextFormField extends StatefulWidget {
-  CustomTextFormField({
+  const CustomTextFormField({
     super.key,
     required this.isPassword,
     required this.hintText,
@@ -16,7 +16,7 @@ class CustomTextFormField extends StatefulWidget {
   final String hintText;
   final IconData prefixIcon;
   final IconData? suffixIcon;
-  Function(String)? onChange;
+  final Function(String)? onChange;
 
   @override
   State<CustomTextFormField> createState() => _CustomTextFormFieldState();
