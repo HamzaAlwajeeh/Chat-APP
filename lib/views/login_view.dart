@@ -13,14 +13,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class LoginView extends StatelessWidget {
+class LoginView extends StatefulWidget {
+  const LoginView({super.key});
+
+  @override
+  State<LoginView> createState() => _LoginViewState();
+}
+
+class _LoginViewState extends State<LoginView> {
   GlobalKey<FormState> formKey = GlobalKey();
+
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
+
   String? email, password;
 
   final bool isLoading = false;
 
-  LoginView({super.key});
   @override
   Widget build(BuildContext context) {
     return Background(
@@ -28,7 +36,11 @@ class LoginView extends StatelessWidget {
       child: BlocConsumer<LoginCubit, LoginState>(
         listener: (context, state) {
           if (state is LoginSuccess) {
-            Navigator.popAndPushNamed(context, kChatView);
+            Navigator.popAndPushNamed(
+              context,
+              kChatView,
+              arguments: state.user.user?.email,
+            );
           } else if (state is LoginFailuar) {
             customSnakBatr(context, message: state.errorMessage);
           }
@@ -92,7 +104,7 @@ class LoginView extends StatelessWidget {
                               );
                             } else {
                               autovalidateMode = AutovalidateMode.always;
-                              // setState(() {});
+                              setState(() {});
                             }
                           },
                           color: kPrimaryColor,
