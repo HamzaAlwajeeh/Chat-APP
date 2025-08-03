@@ -8,4 +8,10 @@ class SimpleBlocObserver extends BlocObserver {
     super.onChange(bloc, change);
     log('$change');
   }
+
+  @override
+  void onTransition(Bloc bloc, Transition transition) {
+    super.onTransition(bloc, transition);
+    log('$transition');
+  }
 }
